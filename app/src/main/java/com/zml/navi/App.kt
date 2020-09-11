@@ -8,6 +8,9 @@ import androidx.core.app.AppOpsManagerCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
+import com.zml.navi.bean.BaseArtistItem
+import com.zml.navi.bean.BaseMusicItem
+import com.zml.navi.util.Utils
 
 /**
  * @package: com.zml.navi
@@ -23,18 +26,11 @@ class App : Application(), ViewModelStoreOwner {
     override fun onCreate() {
         super.onCreate()
 
-
-        var result = AppOpsManagerCompat.noteProxyOp(this, AppOpsManagerCompat.permissionToOp(
-            Manifest.permission.READ_PHONE_STATE)!!,this.getPackageName())
-
-        if (result!= AppOpsManagerCompat.MODE_ALLOWED){
-            //if (result!=PackageManager.PERMISSION_GRANTED){
-            Log.e("ZMLIANG","READ_PHONE_STATE 是否被授予 : false")
-        }else {
-            Log.e("ZMLIANG","READ_PHONE_STATE 是否被授予 : true"+"; ")
-        }
-
         mAppVieModelStore = ViewModelStore()
+
+        Utils.init(this)
+
+
     }
 
 
